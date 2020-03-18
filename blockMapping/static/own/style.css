@@ -1,0 +1,422 @@
+/*#uploaded_table {
+	transform: translate();
+}*/
+
+#upload_table {
+	margin-bottom: 3vw;
+}
+
+.modal {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%) scale(0);
+	/*transition: 200ms ease-in-out;*/
+	border: 1px solid black;
+	z-index: 10;
+	background-color: white;
+	max-width: 80vw;
+	max-height: 80vh;
+	overflow-y: auto;
+    overflow-x: auto;
+}
+
+.modal-body {
+	margin-top: 5vh;
+	margin-bottom: 1vh;
+}
+
+.modal.active {
+	transform: translate(-50%, -50%) scale(1);
+}
+
+.modal-header {
+	padding: 10px 15px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-bottom: 1px solid black;
+}
+
+.modal-header .title {
+	font-size: 1.25rem;
+	font-weight: bold;
+}
+
+.modal-header .close-button {
+	cursor: pointer;
+	border: none;
+	outline: none;
+	background: none;
+	font-size: 1.25rem;
+	font-weight: bold;
+}
+
+#btn_expand {
+	border-radius: 4px;
+	background: linear-gradient(120deg, #f093fb 0%, #f5576c 100%);;
+	border: none;
+	color: #FFFFFF;
+	text-align: center;
+	transition: all 0.5s;
+	cursor: pointer;
+	padding: 1vw;
+	font-size: 1vw;
+	margin-left: 1vw; 
+}
+
+#btn_expand span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+#btn_expand span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+#btn_expand:hover span {
+  padding-right: 25px;
+}
+
+#btn_expand:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+#overlay {
+	position: fixed;
+	opacity: 0; 
+	transition: 200ms ease-in-out;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	pointer-events: none; 
+}
+
+#overlay.active {
+	opacity: 0.5;
+	pointer-events: all;
+}
+
+.img_text {
+  position: absolute;
+  font-weight: bold;
+  font-size: 0.9vw;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.img_text.active {
+}
+
+#text_AMK {
+  top: 15%;
+  left: 28%;	
+}
+
+#text_Bishan {
+  top: 40%;
+  left: 30%;	
+}
+
+#text_Serangoon {
+  top: 28%;
+  left: 60%;	
+}
+
+#text_Hougang {
+  top: 32%;
+  left: 86%;	
+}
+
+#text_ToaPayoh {
+  top: 57%;
+  left: 54%;	
+}
+
+#text_Geylang {
+  top: 73%;
+  left: 88%;	
+}
+
+#text_Novena {
+  top: 75%;
+  left: 36%;	
+}
+
+
+table {
+	margin: 0vw 5vw 5vw 5vw;
+	border-radius: 10px;
+	background: #F8F8FF;
+	border-collapse: collapse;
+	overflow-x:auto;
+	overflow-y:auto;
+}
+
+
+#table_display_place {
+	transform: translate(20%, 50%);
+}
+
+.table_header_row {
+	color: #ffffff;
+	background-color: #6c7ae0;
+	/*font-weight: bold;*/
+}
+
+.table_title {
+  background-color: #FFB6C1;
+  cursor: auto;
+}
+
+.rental_unit {
+  background-color: #FFB6C1;
+  cursor: auto;
+}
+
+#Legend {
+	transform: translate(20%, 50%);
+}
+
+tr:not(.table_header_row):hover {
+  background-color: #ececff;
+  cursor: pointer;
+}
+
+
+tr:not(.table_header_row) td:not(.table_title) {
+	
+	/*border: transparent;*/
+	border-width: 0px;
+	border-right: 2px solid #f2f2f2;
+	border-bottom: 1px solid #f2f2f2;
+	color: #555555;
+	line-height: 1.2;
+	/*font-weight: unset !important;*/
+}
+
+tr {
+	height: 2vw;
+	/*width: 5vw;*/
+}
+
+td {
+	text-align: center;
+	padding-left:1vw;
+	padding-right:1vw; 
+}
+
+.green_cell {
+	background: #1FDEA1;
+}
+
+.red_cell {
+	background: #DE1F5C;
+}
+
+.yellow_cell {
+	background: #CCDE1F;
+}
+
+.blue_cell {
+	background: #1F98DE;
+}
+
+.purple_cell {
+	background: #9B1FDE;
+}
+
+.column_ULM {
+	width: 5vw;
+}
+
+
+body {
+	display: block;
+	background-image: radial-gradient( circle 343px at 46.3% 47.5%,  rgba(242,242,242,1) 0%, rgba(241,241,241,1) 72.9% );
+	margin-top: 0px; 
+}
+
+main {
+	display: grid;
+	grid-template-columns: 20vw 35vw 45vw;
+}
+
+
+header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0px 15px 0px 0px;
+	background-color: rgba(204, 0, 0, 0.7);
+	opacity: 0.9;
+	margin-bottom: 5vh;
+	height: 10vh;
+}
+
+li a {
+	text-decoration: none;
+	padding: 9px 25px;
+}
+
+.nav_links {
+	list-style: none;
+	top: 0px;
+}
+
+.homepage_btn {
+	transform: translate(30%);
+}
+
+.nav_links li {
+	display: inline-block;
+	padding: 0 0.5vw;
+	font-size: 3vh;
+}
+
+.nav_links li a {
+	transition: all 0.3s ease 0s;
+	font-weight: bold;
+	color: black;
+	border: 1px solid black;
+	border-radius: 5px;
+	background-color: rgba(255, 128, 128, 0.7);
+	/*float: right;*/
+}
+
+.nav_links li a:hover {
+	background-color: rgb(128, 159, 255);
+	border-radius: 20px;
+}
+
+.set_to_invisible {
+	visibility:hidden;
+}
+
+area {
+	cursor: pointer;
+}
+
+#disease_choices li {
+	list-style: none;
+}
+
+.ds-cbox {
+	max-width: 70%;
+	border: 1px solid black;
+	border-radius: 5px;
+	background-color: rgba(250, 128, 114, .5); 
+	/*background: linear-gradient(35deg, #CCFFFF, #FFCCCC);*/
+}
+
+.ds-cbox p {
+	margin-top: 0.5%; 
+	text-decoration: underline;
+}
+
+ul.ds-cbox {
+    list-style: none;
+    padding: 20px;
+}
+
+ul.ds-cbox label{
+    display: inline-block;
+    background-color: rgba(255, 255, 255, .9);
+    border: 2px solid rgba(139, 139, 139, .3);
+    border-radius: 25px;
+    white-space: nowrap;
+    margin: 3px 0px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: all .2s;
+}
+
+ul.ds-cbox label {
+    padding: 8px 12px;
+}
+
+input[type="checkbox"] {
+	cursor: pointer;
+}
+
+input[type="checkbox"]:checked {
+	transform: rotate(-360deg);
+    transition: transform .3s ease-in-out;
+}
+
+input[type="checkbox"]:not(:checked) {
+	transform: rotate(360deg);
+    transition: transform .3s ease-in-out;
+}
+
+input[type="checkbox"]:checked + label {
+    border: 2px solid #1bdbf8;
+    background-color: #12bbd4;
+    color: #fff;
+    transition: all .2s;
+}
+
+input[type="checkbox"]:not(:checked) + label {
+    background-color: rgba(255, 255, 255, .9);
+    border: 2px solid rgba(139, 139, 139, .3);
+    color: #000000;
+    transition: all .2s;
+}
+
+#my_map {
+  /*height:auto;*/
+  /*verflow:scroll;*/
+  /*clear: both;*/
+}
+
+#central_map {
+	max-width: 100%;
+    height: auto;
+}
+
+#logo{
+	height: 100%;
+	/*width: auto;*/
+}
+
+#logo img{
+	max-height: 100%;
+	width: auto;
+}
+
+#logo {
+	margin: 0px;
+}
+
+
+/*ul.ds-cbox li input[type="checkbox"]:checked + label {
+    border: 2px solid #1bdbf8;
+    background-color: #12bbd4;
+    color: #fff;
+    transition: all .2s;
+}
+
+ul.ds-cbox li input[type="checkbox"] {
+  display: absolute;
+}
+ul.ds-cbox li input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+}
+ul.ds-cbox li input[type="checkbox"]:focus + label {
+  border: 2px solid #e9a1ff;
+}*/

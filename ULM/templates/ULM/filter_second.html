@@ -1,0 +1,21 @@
+{% extends 'base_ULM.html' %}
+{% load static %}
+
+{% block content %}
+
+{{intro}}
+
+{% for key, value in response.items %}
+    <h4>{{key}} : {{value}} </h4>
+{% endfor %}
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table>
+        {{form.as_table}}
+    </table>
+    <br>
+    <button type="submit"> Filter </button>
+</form>
+
+{% endblock %}

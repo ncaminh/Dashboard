@@ -1,0 +1,152 @@
+{% extends 'base_ULM.html' %}
+{% load static %}
+
+{% block content %}
+
+<h1> This is the display page where visualization table will be displayed</h1>
+{{content}}
+
+{% for key, value in response.items %}
+<h4>{{key}} : {{value}} </h4>
+{% endfor %}
+
+house floor : {{house_floor}} <br />
+house unit : {{house_unit}} <br />
+rental status : {{rental_status}}
+<br /><br />
+data: {{data}}
+<h5>data is a dictionary that contains another dictionary. The key is #floor-#unit</h5>
+
+
+<div id="table_display_place">
+</div>
+
+<div id="Legend">
+	<table border=0>
+		<tr class="table_title"><td>Legend</td></tr>
+		<tr class="table_header_row"><td>Label</td><td>Program</td></tr>
+		<tr><td class='red_cell'>FA</td><td>Frequent Admitter</td></tr>
+		<tr><td class='green_cell'>FR</td><td>Frequent Admitter Risk</td></tr>
+		<tr><td class='yellow_cell'>TD</td><td>TCU Defaulter</td></tr>
+		<tr><td class='blue_cell'>AD</td><td>Referral</td></tr>
+		
+	</table>
+</div>
+
+{% endblock %}
+
+{% block script %}
+<script>
+	var response_pre = "{{response|escapejs}}".replace(/'/g,"\"").replace(/"s/g,"'");
+	var house_floor_pre = "{{house_floor|escapejs}}".replace(/'/g,"\"").replace(/"s/g,"'");;
+	var house_unit_pre = "{{house_unit|escapejs}}".replace(/'/g,"\"").replace(/"s/g,"'");
+	var data_pre = "{{data|escapejs}}".replace(/'/g,"\"").replace(/"s/g,"'");
+	
+	var response = JSON.parse(response_pre);
+	var data = JSON.parse(data_pre);
+
+	var house_floor = JSON.parse(house_floor_pre);;
+	var house_unit = JSON.parse(house_unit_pre);
+
+	var rental = "{{rental_status|escapejs}}";
+	var rental_stat = "non_rental"
+	if (rental == "True") {
+		rental_stat = "rental_unit"
+	}
+
+	function create_table_display() {
+		var mytable = '<table border=0><tr><td class=' + rental_stat + '>' + response['Region'] + ': ' + response['Block'] + ' ' + response['Street'];
+
+		if (rental == "True") {
+			mytable += ' (Rental Unit)';
+		}
+
+		mytable += '</td></tr>';
+
+		for (var row = -1; row < house_floor.length; row ++) {
+			if (row == -1) {
+				for (var col = -1; col < house_unit.length; col ++) {
+					if (col == -1) {
+						mytable += '<tr class = "table_header_row"><td>Level / Unit</td>';
+					}
+					else {
+						mytable += '<td class="column_ULM">' + house_unit[col] + '</td>';
+					}
+				}
+			} 
+			else {
+				for (var col = -1; col < house_unit.length; col ++) {
+					let curr_floor = house_floor[row];
+					let curr_unit = house_unit[col];
+
+					if (col == -1) {
+						mytable += '<tr><td>' + house_floor[row] + '</td>';
+					}
+					else if (typeof(data[curr_floor][curr_unit]) !== 'undefined') {
+						let cell_content = "";
+						let status_tracker = 0;
+						let cell_color;
+						
+						// alert(typeof(data[curr_floor][curr_unit]['fa_risk_status']));
+						if (data[curr_floor][curr_unit]['fa_risk_status'] == "FR") {
+							cell_content += "FR ";
+							status_tracker 	+= 1000;
+						}
+
+						if (data[curr_floor][curr_unit]['fa_status'] == "FA") {
+							cell_content += "FA ";	
+							status_tracker 	+= 100;
+						}
+
+						if (data[curr_floor][curr_unit]['tcu_status'] == "TD") {
+							cell_content += "TD ";	
+							status_tracker 	+= 10;
+						}
+
+						if (data[curr_floor][curr_unit]['irms_status'] == "AD") {
+							cell_content += "AD ";	
+							status_tracker 	+= 1;
+						}
+
+						switch (status_tracker) {
+							case 1000:
+								cell_color = "green_cell";
+								break;
+							case 100:
+								cell_color = "red_cell";
+								break;
+							case 10:
+								cell_color = "yellow_cell";
+								break;
+							case 1:
+								cell_color = "blue_cell";
+								break;
+							case 0:
+								cell_color ="blank_cell";
+								break;
+							default:
+								cell_color = "purple_cell";
+						}
+ 
+						mytable += '<td class=' + cell_color + '>' + cell_content + '</td>';
+					}
+					else {
+						mytable += '<td></td>';
+					}
+				}
+			}
+			mytable += '</tr>';
+		}
+
+		mytable += '</table>';
+
+		// document.getElementById('table_display_place').innerHTML = '<p>aaa</p>';
+		document.getElementById('table_display_place').innerHTML = mytable;
+	}	
+
+	create_table_display();
+
+	
+</script>
+
+{% endblock %}

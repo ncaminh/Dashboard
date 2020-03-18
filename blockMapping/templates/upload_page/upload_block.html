@@ -1,0 +1,10 @@
+{% extends 'base_BLM.html' %}
+
+{% block content %}
+
+<form method="POST" enctype="multipart/form-data"> {% csrf_token %}
+	{{ form.as_p }}
+	<input type="submit" name="Upload"/>
+</form>
+
+{% endblock %}

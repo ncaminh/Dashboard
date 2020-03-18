@@ -1,0 +1,46 @@
+{% extends 'base_ULM.html' %}
+{% load static %}
+
+{% block content %}
+
+<p> Uploaded filed </p>
+
+<table id="uploaded_table">
+	<tr class="table_title"><td>File</td><td>Uploaded time</td></tr>
+	{% for file in files %}
+		<tr>
+			<td>{{ file.file_name }}</td> 
+			<td>{{ file.upload_date_time }}</td> 
+		</tr>
+	{% endfor %}
+</table>
+
+
+
+<form method="POST" enctype="multipart/form-data">
+	{% csrf_token %}
+<!-- >
+    <label for="test"> Test file:</label>
+    <input type="file" name="test" id="test">
+    <label for="fa_risk"> FA risk file:</label>
+    <input type="file" name="fa_risk" id="fa_risk">
+-->
+	<table id="upload_table">
+    	{{form.as_table}}
+	</table>
+    <button type="submit"> Upload </button>
+</form>
+
+<h3> {{ error }} </h3>
+
+{% endblock %}
+
+{% block script %}
+<script>
+	var check = "{{check|escapejs}}"
+	if (check == "bar") {
+		alert("Upload successful");
+	}
+</script>
+
+{% endblock %}

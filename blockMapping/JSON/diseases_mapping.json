@@ -1,0 +1,49 @@
+{
+    "Mental Health": [
+        "Alcohol Intoxication", 
+        "Anxiety", 
+        "Bipolar Disorder", 
+        "Dementia", 
+        "Depression", 
+        "Insomnia", 
+        "Intellectual Disability", 
+        "Schizophrenia", 
+        "Substance Abuse"
+    ], 
+    "Neurology": [
+        "Stroke", 
+        "Parkinson's Disease", 
+        "Epilepsy"
+    ], 
+    "Urology": [
+        "Benign Prostatic Hyperplasia", 
+        "Nephritis/Nephrosis"
+    ], 
+    "Cardiovascular Disease": [
+        "Coronary Heart Disease", 
+        "Atrial Fibrillation", 
+        "Heart Failure", 
+        "Hypertension", 
+        "Pregnancy Induced Hypertension", 
+        "Dyslipidaemia", 
+        "Peripheral Vascular Disease"
+    ], 
+    "Renal": "Chronic Kidney Disease", 
+    "Respiratory": [
+        "Asthma", 
+        "COPD"
+    ], 
+    "Orthopaedics": [
+        "Osteopenia", 
+        "Osteoporosis", 
+        "Hip Fracture", 
+        "Spine Fracture", 
+        "Osteoarthritis", 
+        "Rheumatoid Arthritis"
+    ], 
+    "Diabetes": [
+        "Pre-Diabetes", 
+        "Gestational Diabetes Mellitus", 
+        "Diabetes Mellitus"
+    ]
+}
