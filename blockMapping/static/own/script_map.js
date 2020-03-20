@@ -1,6 +1,7 @@
 const openModalButtons = document.querySelectorAll('[data-modal-target]')
 const closeModalButtons = document.querySelectorAll('[data-close-button]')
 const overlay = document.getElementById('overlay')
+const toggler = document.getElementById('btn_toggle')
 
 openModalButtons.forEach(button => {
 	button.addEventListener('click', () => {
@@ -14,6 +15,10 @@ closeModalButtons.forEach(button => {
 		const modal = button.closest('.modal')
 		closeModal(modal)
 	})
+})
+
+toggler.addEventListener('click', () => {
+	fill_data_sub_diseases()
 })
 
 function openModal(modal) {
@@ -58,9 +63,10 @@ function updateDict(e) {
 function create_table(zone_code, zone_name) {
 	current_dist = zone_code;
 	var info = json_dict_full[zone_code];
-	total_rows = info[0].length + 1;
-	total_columns = info[1].length + 1;
+	let total_rows = info[0].length + 1;
+	let total_columns = info[1].length + 1;
 	var choices_indexes = [];
+
 
 	for (choice in choices) {
 		temp = info[1].findIndex(element => element == choice);
@@ -68,7 +74,7 @@ function create_table(zone_code, zone_name) {
 	}
 
 
-	var mytable = '<table border=0><tr><td class="table_title"> Alo </td></tr>';
+	var mytable = '<table border=0><tr><td class="table_title">' + zone_name + '</td></tr>';
 
 	for (var row = 0; row < total_rows; row ++) {
 
@@ -95,9 +101,11 @@ function create_table(zone_code, zone_name) {
 };
 
 function expandTable() {
-  var tempo = [];
-  var choices_indexes = [];
-  var info = json_dict_full[current_dist];
+  let tempo = [];
+  let choices_indexes = [];
+  
+  let info = json_dict_full[current_dist];
+  let total_rows = info[0].length + 1;
 
   if (current_dist == "") {
   	document.getElementById('modal-body').innerHTML = "Please choose a district first";
@@ -135,6 +143,82 @@ function expandTable() {
   }
 }
 
+
+function fill_data_sub_diseases() {
+	let info_full = json_dict_full
+	let regions = Object.keys(json_dict_full)
+	let choices_indexes = []
+	var preview_dict = {}
+	
+	// alert(regions)
+	// alert(Object.keys(info_full))
+
+	if (Object.keys(choices).length == 1) {
+		let tempo = []
+		for (choice in choices) {
+			tempo = tempo.concat(mapping_dict[choices[choice]]);
+		}
+
+		if (tempo.length < 4) {
+			for (index = 0; index < tempo.length; index++) {
+      			temp = info_full[regions[0]][1].findIndex(element => element == tempo[index]);
+      			if (temp > -1) choices_indexes.push(temp);
+    		}
+    		
+    		for (region_index = 0; region_index < regions.length; region_index++) {
+    			let total_sub_area = info_full[regions[region_index]][0].length
+    			for (i = 0; i < choices_indexes.length; i++) {
+    				preview_dict[regions[region_index]] = {}
+		    		preview_dict[regions[region_index]][choices_indexes[i]] = 0
+
+		    		for (var row = 1; row <= total_sub_area; row ++) {
+						preview_dict[regions[region_index]][choices_indexes[i]] += info_full[regions[region_index]][row+1][choices_indexes[i]]
+					}
+
+					let k = i+1;
+					let txt = info_full[regions[0]][1][choices_indexes[i]];
+					// preview_dict[regions[region_index]][choices_indexes[i]]
+
+					txt +=  ": " + preview_dict[regions[region_index]][choices_indexes[i]].toString();
+					$('area[id ="' + regions[region_index] + '"]').data(k.toString(), txt) 
+		    	}
+		    	
+    		}
+   
+    		// $('area[id ="' + regions[0] + '"]').data('1',2000);
+    		show_data_sub_diseases(tempo.length)
+
+		} else {
+			alert("The selected disease has more than 3 secondary diseases")
+		}
+	} else {
+		alert("You have selected more than 1 disease")
+	}
+
+}
+
+function show_data_sub_diseases(diseases_num) {
+	$("p").remove(".preview");	
+	$('area').each(function(){
+		let txt="";
+		for (i = 1; i <= diseases_num; i++) {
+			if (i > 1) {
+				txt += "<br>";
+			}
+			txt += $(this).data(i.toString());
+		}
+		
+		// alert(txt)
+        var coor=$(this).attr('coords');
+        var coorA=coor.split(',');
+        var left=coorA[0];
+        var top=coorA[1];
+
+        var $span=$('<p class="preview">'+txt+'</p>');        
+        $span.css({top: top+'px', left: left+'px', position:'absolute'});
+        $span.appendTo('#my_map');
+    })
+}
 /*_________________________________________________________*/
 /*
 * rwdImageMaps jQuery plugin v1.6
@@ -194,6 +278,8 @@ function expandTable() {
 								coordsPercent[i] = parseInt(((coords[i]/h)*100)*hPercent);
 						}
 						$this.attr(c, coordsPercent.toString());
+						
+
 					});
 				}).attr('src', $that.attr('src'));
 			});

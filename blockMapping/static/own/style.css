@@ -378,6 +378,7 @@ input[type="checkbox"]:not(:checked) + label {
 }
 
 #my_map {
+	position: relative;
   /*height:auto;*/
   /*verflow:scroll;*/
   /*clear: both;*/
@@ -400,6 +401,10 @@ input[type="checkbox"]:not(:checked) + label {
 
 #logo {
 	margin: 0px;
+}
+
+.preview {
+	font-size: 0.5vw;
 }
 
 

@@ -13,9 +13,11 @@
       <li><input type="checkbox" name="main-disease" value="Respiratory"><label>Respiratory</label></li>
       <li><input type="checkbox" name="main-disease" value="Orthopaedics"><label>Orthopaedics</label></li>
       <li><input type="checkbox" name="main-disease" value="Diabetes"><label>Diabetes</label></li>
+      <li><input type="checkbox" name="main-disease" value="Special"><label>Special</label></li>
     </ul>
 
     <button data-modal-target="#modal" onclick="expandTable()" id="btn_expand"><span>Expand table</span></button>
+    <button id="btn_toggle"><span>Toggle</span></button>
   </div>
   
 
@@ -23,13 +25,13 @@
   <div id="my_map">
     <img src="{% static 'own/Images/Picture1.png' %}" id="central_map" alt="CentralMap" usemap="#centralmap">
     <map name="centralmap">
-      <area name="Ang Mo Kio" class="area" id="AMK" alt="Ang Mo Kio" title="AMK" shape="poly" coords="41,33,76,42,110,41,144,34,177,25,208,12,228,15,249,16,269,14,287,9,290,7,303,10,312,22,315,58,312,91,311,138,312,166,330,201,331,214,320,263,301,318,291,306,282,290,273,282,264,272,255,266,250,264,242,261,234,255,226,256,218,256,198,253,185,248,164,238,142,231,118,224,103,225,107,201,100,191,96,186,94,171,103,157,92,138,84,136,77,143,71,143,69,133,62,138,58,134,35,132,47,115,48,99,42,91,38,84,29,86,30,78,36,74,37,71,40,57,39,48" style="outline:none;" target="_self"     />
-      <area name="Bishan" class="area" id="Bishan" alt="Bishan" title="Bishan" shape="poly" coords="109,234,99,270,85,266,82,279,63,280,56,285,44,309,45,329,70,346,96,328,111,340,117,341,132,350,133,362,144,364,160,384,157,387,168,392,170,414,162,422,188,406,196,396,224,410,238,406,284,413,326,410,303,328,282,315,276,295,232,263,110,233" style="outline:none;" target="_self"     />
-      <area name="Serangoon" class="area" id="Serangoon" alt="Serangoon" title="Serangoon" shape="poly" coords="316,55,372,73,422,87,442,106,441,153,447,179,435,222,436,234,416,266,420,291,454,340,452,355,468,368,469,393,490,425,450,400,429,412,394,418,380,405,368,403,352,409,332,410,320,375,305,322,320,275,332,242,339,219,319,161" style="outline:none;" target="_self"     />
-      <area name="Hougang" class="area" id="Hougang" alt="Hougang" title="Hougang" shape="poly" coords="426,86,456,72,470,77,497,98,536,134,569,140,582,145,598,146,633,138,640,136,672,166,619,305,591,322,588,340,576,337,555,381,587,390,596,419,588,444,572,465,556,478,527,487,514,446,473,393,459,351,452,332,435,306,424,286,423,268,440,238,450,190,446,150,450,123,450,104" style="outline:none;" target="_self"     />
-      <area name="Toa Payoh" class="area" id="ToaPayoh" alt="Toa Payoh" title="ToaPayoh" shape="poly" coords="166,430,198,406,209,410,224,418,239,413,261,413,288,421,311,419,321,416,347,418,360,411,376,411,390,424,407,422,423,418,436,417,445,409,463,422,496,435,508,448,511,463,521,486,500,486,465,501,448,508,435,506,409,518,400,524,395,535,344,512,303,523,272,520,253,518,225,519,209,519,192,521,180,506,170,478" style="outline:none;" target="_self"     />
-      <area name="Geylang" class="area" id="Geylang" alt="Geylang" title="Geylang" shape="poly" coords="579,462,644,530,635,593,640,611,652,642,624,665,614,673,595,670,550,670,529,681,536,693,493,705,470,686,444,678,428,610,445,590,396,536,420,519,448,511,467,507,505,494,522,493,533,494,549,488,559,486" style="outline:none;" target="_self"     />
-      <area name="Novena-Kallang-Rochor" class="area" id="Novena-Kallang-Rochor" alt="Novena-Kallang-Rochor" title="Novena-Kallang-Rochor" shape="poly" coords="4,562,64,574,156,611,188,653,232,671,244,688,236,694,252,706,241,719,231,712,228,715,232,722,228,727,231,737,243,750,251,745,259,754,256,757,272,770,295,744,285,723,292,720,338,757,346,789,502,773,503,738,496,730,496,713,483,704,468,695,452,688,436,685,438,676,435,662,432,654,428,623,427,607,433,595,438,592,432,587,422,578,412,568,401,554,396,545,378,530,363,521,345,518,316,526,301,530,295,528,274,527,254,522,230,522,200,526,189,529,179,517,173,502,165,484,164,474,164,466,167,456,167,448,163,440,159,432,151,434,140,441,133,442,125,442,116,437,94,434,80,434,60,440,48,445,43,466,37,481,29,490,23,498,15,512,9,529,7,539" style="outline:none;" target="_self"     />
+      <area name="Ang Mo Kio" class="area" id="AMK" alt="Ang Mo Kio" title="AMK" shape="poly" coords="41,33,76,42,110,41,144,34,177,25,208,12,228,15,249,16,269,14,287,9,290,7,303,10,312,22,315,58,312,91,311,138,312,166,330,201,331,214,320,263,301,318,291,306,282,290,273,282,264,272,255,266,250,264,242,261,234,255,226,256,218,256,198,253,185,248,164,238,142,231,118,224,103,225,107,201,100,191,96,186,94,171,103,157,92,138,84,136,77,143,71,143,69,133,62,138,58,134,35,132,47,115,48,99,42,91,38,84,29,86,30,78,36,74,37,71,40,57,39,48" style="outline:none;" target="_self" data-1="Lorem Ipsum1" data-2="Lorem Ipsum2" data-3="Lorem Ipsum3"    />
+      <area name="Bishan" class="area" id="Bishan" alt="Bishan" title="Bishan" shape="poly" coords="109,234,99,270,85,266,82,279,63,280,56,285,44,309,45,329,70,346,96,328,111,340,117,341,132,350,133,362,144,364,160,384,157,387,168,392,170,414,162,422,188,406,196,396,224,410,238,406,284,413,326,410,303,328,282,315,276,295,232,263,110,233" style="outline:none;" target="_self" data-1="Lorem Ipsum1" data-2="Lorem Ipsum2" data-3="Lorem Ipsum3"     />
+      <area name="Serangoon" class="area" id="Serangoon" alt="Serangoon" title="Serangoon" shape="poly" coords="316,55,372,73,422,87,442,106,441,153,447,179,435,222,436,234,416,266,420,291,454,340,452,355,468,368,469,393,490,425,450,400,429,412,394,418,380,405,368,403,352,409,332,410,320,375,305,322,320,275,332,242,339,219,319,161" style="outline:none;" target="_self" data-1="Lorem Ipsum1" data-2="Lorem Ipsum2" data-3="Lorem Ipsum3"    />
+      <area name="Hougang" class="area" id="Hougang" alt="Hougang" title="Hougang" shape="poly" coords="426,86,456,72,470,77,497,98,536,134,569,140,582,145,598,146,633,138,640,136,672,166,619,305,591,322,588,340,576,337,555,381,587,390,596,419,588,444,572,465,556,478,527,487,514,446,473,393,459,351,452,332,435,306,424,286,423,268,440,238,450,190,446,150,450,123,450,104" style="outline:none;" target="_self" data-1="Lorem Ipsum1" data-2="Lorem Ipsum2" data-3="Lorem Ipsum3"    />
+      <area name="Toa Payoh" class="area" id="ToaPayoh" alt="Toa Payoh" title="ToaPayoh" shape="poly" coords="166,430,198,406,209,410,224,418,239,413,261,413,288,421,311,419,321,416,347,418,360,411,376,411,390,424,407,422,423,418,436,417,445,409,463,422,496,435,508,448,511,463,521,486,500,486,465,501,448,508,435,506,409,518,400,524,395,535,344,512,303,523,272,520,253,518,225,519,209,519,192,521,180,506,170,478" style="outline:none;" target="_self" data-1="Lorem Ipsum1" data-2="Lorem Ipsum2" data-3="Lorem Ipsum3"    />
+      <area name="Geylang" class="area" id="Geylang" alt="Geylang" title="Geylang" shape="poly" coords="579,462,644,530,635,593,640,611,652,642,624,665,614,673,595,670,550,670,529,681,536,693,493,705,470,686,444,678,428,610,445,590,396,536,420,519,448,511,467,507,505,494,522,493,533,494,549,488,559,486" style="outline:none;" target="_self" data-1="Lorem Ipsum1" data-2="Lorem Ipsum2" data-3="Lorem Ipsum3"    />
+      <area name="Novena-Kallang-Rochor" class="area" id="Novena-Kallang-Rochor" alt="Novena-Kallang-Rochor" title="Novena-Kallang-Rochor" shape="poly" coords="4,562,64,574,156,611,188,653,232,671,244,688,236,694,252,706,241,719,231,712,228,715,232,722,228,727,231,737,243,750,251,745,259,754,256,757,272,770,295,744,285,723,292,720,338,757,346,789,502,773,503,738,496,730,496,713,483,704,468,695,452,688,436,685,438,676,435,662,432,654,428,623,427,607,433,595,438,592,432,587,422,578,412,568,401,554,396,545,378,530,363,521,345,518,316,526,301,530,295,528,274,527,254,522,230,522,200,526,189,529,179,517,173,502,165,484,164,474,164,466,167,456,167,448,163,440,159,432,151,434,140,441,133,442,125,442,116,437,94,434,80,434,60,440,48,445,43,466,37,481,29,490,23,498,15,512,9,529,7,539" style="outline:none;" target="_self" data-1="Lorem Ipsum1" data-2="Lorem Ipsum2" data-3="Lorem Ipsum3"    />
     </map>
   </div>
   <!-- Map end-->
@@ -49,6 +51,7 @@
   <div class="modal-body" id="modal-body">
   </div>
 </div>
+
 <div id="overlay"></div>
 
 {% endblock %}
@@ -57,8 +60,9 @@
 <script>
 $(document).ready(function(e) {
   $('img[usemap]').rwdImageMaps();
-  
 });
+
+
 </script>
 
 <script type="text/javascript">

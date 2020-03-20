@@ -23,10 +23,8 @@ def extract_data_from_file(filename, file_type, **kwargs):
     print("A:" + current_time)
 
     if (file_type == 1):
-        print("jjnjn")
         df = pd.read_excel(filename, sheet_name='Working', skiprows = 3);
     else:
-        print("aaaaaa")
         df = pd.read_csv(filename);
     
     print("cccccccc")
@@ -41,21 +39,33 @@ def extract_data_from_file(filename, file_type, **kwargs):
     diseases_mapping = json.load(json_file);
     json_file.close();
 
+    special_file = open('blockMapping/JSON/special.json', 'r', encoding='utf-8');
+    special = json.load(special_file);
+    special_file.close();
+
     for main_disease in diseases_mapping.keys():
         if main_disease in df.columns:
             df = df.drop(columns=main_disease);
         if (isinstance(diseases_mapping[main_disease], str)):
-            df[main_disease] = df[diseases_mapping[main_disease]];
+            if (main_disease != "Special"):
+                df[main_disease] = df[diseases_mapping[main_disease]];
         else:
             # df[main_disease] = df.apply(lambda row : insert_main_columns(row, diseases_mapping[main_disease]), axis=1);
             sub_diseases = diseases_mapping[main_disease]
             df[main_disease] = df[sub_diseases].sum(axis = 1, skipna = True) / df[sub_diseases].sum(axis = 1, skipna = True)
+
+
+    df['Special'] = np.where(df[special.keys()].sum(axis = 1, skipna =True)==2, 1, np.nan)
+
+    
+
 
     t = time.localtime()
     current_time = time.strftime("%H:%M:%S", t)
     print("C:" + current_time)
 
     diseaseList = df.columns[10:]
+    print(diseaseList)
 
     table = df.pivot_table(values=diseaseList, index=['Planning Area', 'Sub Zone'], aggfunc="count");
     result = {
