@@ -1,9 +1,10 @@
-/*#uploaded_table {
-	transform: translate();
-}*/
+.uploaded_table {
+	margin: 0vw 0vw 5vw 0vw;
+}
 
 #upload_table {
 	margin-bottom: 3vw;
+
 }
 
 .modal {
@@ -217,7 +218,11 @@ td {
 	padding-right:1vw; 
 }
 
-.cell_to_hover .tooltiptext {
+.cell_to_hover {
+  position: relative;
+}
+
+.cell_to_hover .patient_ID {
   visibility: hidden;
   width: 120px;
   background-color: black;
@@ -226,34 +231,52 @@ td {
   border-radius: 6px;
   padding: 5px 0;
 
-  /* Position the tooltip */
+  /* Position the patient_ID */
   position: absolute;
   z-index: 10;
+  top: 100%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.cell_to_hover .patient_ID::after {
+  content: " ";
+  position: absolute;
+  bottom: 100%;  /* At the top of the tooltip */
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent black transparent;
 }
 
 
-.cell_to_hover:hover .tooltiptext{
+.cell_to_hover:hover .patient_ID{
 	visibility: visible;
 }
 
-.green_cell {
-	background: #1FDEA1;
+.cell_FA {
+	background: #FF9AA2;
 }
 
-.red_cell {
-	background: #DE1F5C;
+.cell_FR {
+	background: #FFB7B2;
 }
 
-.yellow_cell {
-	background: #CCDE1F;
+.cell_TCU {
+	background: #FFDAC1;
 }
 
-.blue_cell {
-	background: #1F98DE;
+.cell_Referral {
+	background: #E2F0CB;
 }
 
-.purple_cell {
-	background: #9B1FDE;
+.cell_Withdrawn {
+	background: #B5EAD7;
+}
+
+.cell_Others {
+	background: #C7CEEA;
 }
 
 .column_ULM {
@@ -287,6 +310,24 @@ header {
 li a {
 	text-decoration: none;
 	padding: 9px 25px;
+}
+
+#Home {
+	/*float: left;*/
+	padding: 0 0.5vw;
+
+	/*border: 1px solid black;*/
+}
+
+#Home span {
+	font-weight: bold;
+	color: black;
+	font-size: 4vh;
+}
+
+#Home a {
+	float: left;
+	text-decoration: none;
 }
 
 .nav_links {
@@ -409,39 +450,35 @@ input[type="checkbox"]:not(:checked) + label {
     height: auto;
 }
 
-#logo{
-	height: 100%;
-	/*width: auto;*/
-}
-
-#logo img{
-	max-height: 100%;
+#home img{
+	height: 6vh;
 	width: auto;
-}
-
-#logo {
-	margin: 0px;
+	margin-left: 1.5vw;
 }
 
 .preview {
 	font-size: 12px;
+	font-weight: 550;
+}
+
+.ULM_form table {
+	margin-bottom: 1vh;
+}
+
+.ULM_form th {
+	text-align: left;
+}
+
+.ULM_form td {
+	text-align: left;
+}
+
+.ULM_form select {
+	width: 180px;
+}
+
+.ULM_form input {
+	width: 180px;
 }
 
 
-/*ul.ds-cbox li input[type="checkbox"]:checked + label {
-    border: 2px solid #1bdbf8;
-    background-color: #12bbd4;
-    color: #fff;
-    transition: all .2s;
-}
-
-ul.ds-cbox li input[type="checkbox"] {
-  display: absolute;
-}
-ul.ds-cbox li input[type="checkbox"] {
-  position: absolute;
-  opacity: 0;
-}
-ul.ds-cbox li input[type="checkbox"]:focus + label {
-  border: 2px solid #e9a1ff;
-}*/

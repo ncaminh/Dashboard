@@ -257,6 +257,7 @@ FILTERED_MONTH_YEAR_REGION_BLOCK_STREET = """
 SELECT
  pat_id.house_floor
  ,pat_id.house_unit
+ ,pat_id.patient_id
  ,(fa_risk_status) as fa_risk_status
  ,(fa_status) as fa_status
  ,(tcu_status) as tcu_status

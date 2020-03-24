@@ -104,36 +104,37 @@ def restructure_data(list_of_dict):
                 #print("hu: " + str(hu))
                 if track_house_unit.count(hu) == 0 and hu != '':
                     track_house_unit.append(hu)
+                    list_patient_id = [dict['patient_id']]
                     content_dict = {
                         'fa_risk_status' : 'FR' if dict['fa_risk_status'] == True else '', 
                         'fa_status' : 'FA' if dict['fa_status'] == True else '',
                         'tcu_status' : 'TD' if dict['tcu_status'] == True else '',
                         'irms_status' : 'AD' if dict['irms_status'] == 'Admitted' else '',
                         'irms_status_2' : 'WD' if dict['irms_status'] == 'Withdrawn' else '',
+                        'patient_id' : list_patient_id,
                         }
                 elif hu == '':
                     hu = "Unknown" + str(id_hu)
                     id_hu += 1
+                    list_patient_id = [dict['patient_id']]
                     content_dict = {
                             'fa_risk_status' : 'FR' if dict['fa_risk_status'] == True else '', 
                             'fa_status' : 'FA' if dict['fa_status'] == True else '',
                             'tcu_status' : 'TD' if dict['tcu_status'] == True else '',
                             'irms_status' : 'AD' if dict['irms_status'] == 'Admitted' else '',
                             'irms_status_2' : 'WD' if dict['irms_status'] == 'Withdrawn' else '',
+                            'patient_id' : list_patient_id,
                             }
                 elif track_house_unit.count(hu) > 0:
-                    #print("first")
-                    #print(dict['fa_risk_status'] == True)
-                    #print("second")
-                    #print(house_unit_dict[hu]['fa_risk_status'] == 'FR')
-                    #print("third")
-                    #print(house_unit_dict[hu]['fa_status'] == 'FA')
+                    list_patient_id = house_unit_dict[hu]['patient_id']
+                    list_patient_id.append(dict['patient_id'])
                     content_dict = {
                         'fa_risk_status' : 'FR' if ((dict['fa_risk_status'] == True) or (house_unit_dict[hu]['fa_risk_status'] == 'FR')) else '', 
                         'fa_status' : 'FA' if ((dict['fa_status'] == True) or (house_unit_dict[hu]['fa_status'] == 'FA')) else '',
                         'tcu_status' : 'TD' if ((dict['tcu_status'] == True) or (house_unit_dict[hu]['tcu_status'] == 'TD')) else '',
                         'irms_status' : 'AD' if ((dict['irms_status'] == 'Admitted') or (house_unit_dict[hu]['irms_status'] == 'AD')) else '',
                         'irms_status_2' : 'WD' if ((dict['irms_status'] == 'Withdrawn') or (house_unit_dict[hu]['irms_status_2'] == 'WD')) else '',
+                        'patient_id' : list_patient_id,
                         }
                 house_unit_dict[hu] = content_dict
                 if hf is None:
@@ -142,7 +143,6 @@ def restructure_data(list_of_dict):
         if hf is None:
             hf = 'Unknown' + str(id_hf)
             id_hf += 1
-        #print(house_unit_dict)
         new_dict[str(hf)] = house_unit_dict
     return new_dict
 
@@ -152,23 +152,23 @@ def restructure_data_landed2(list_of_dict):
     for i in range(1,len(list_of_dict) + 1):
         list_house_floors.append("Landed" + str(i))
    
-    
-    #space = ' '
     i = 0
     for hf in list_house_floors:
         house_unit_dict = {}
         dict = list_of_dict[i]
+        list_patient_id = [dict['patient_id']]
         content_dict = {
             'fa_risk_status' : 'FR' if dict['fa_risk_status'] == True else '', 
             'fa_status' : 'FA' if dict['fa_status'] == True else '',
             'tcu_status' : 'TD' if dict['tcu_status'] == True else '',
             'irms_status' : 'AD' if dict['irms_status'] == 'Admitted' else '',
+            'irms_status_2' : 'WD' if dict['irms_status'] == 'Withdrawn' else '',
+            'patient_id' : list_patient_id,
             }
         house_unit_dict[' '] = content_dict
 
         new_dict[str(hf)] = house_unit_dict
         i += 1
-        #space = space + ' '
     return new_dict
 
 def restructure_data_landed(list_of_dict):

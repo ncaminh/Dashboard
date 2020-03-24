@@ -1,11 +1,16 @@
 {% extends 'base_ULM.html' %}
 {% load static %}
 
+{% block title %}
+<title>Unit Level Mapping: Filter 1</title>
+{% endblock %}
+
+
 {% block content %}
 
-{{intro}}
+<p style="font-weight: bold; font-size: 20px">Please select the month, year and region to display the visualization.</p>
 
-<form method="POST" enctype="multipart/form-data">
+<form method="POST" enctype="multipart/form-data" class="ULM_form">
     {% csrf_token %}
     <table>
         {{form.as_table}}

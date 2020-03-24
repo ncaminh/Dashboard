@@ -148,7 +148,6 @@ def filter_first_iter(request):
 
     context = {
         'title' : 'Filter by Month and Region',
-        'intro' : 'Please select the month and region to display the visualization.',
         'form'  : filter_form,
         }
 

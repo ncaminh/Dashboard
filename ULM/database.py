@@ -1,4 +1,4 @@
 username = 'root'
 password = 'caheo'
 
-DATABASE_NAME = "ttsh"
+DATABASE_NAME = "ttsh_new"
