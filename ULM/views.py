@@ -1,4 +1,4 @@
-import csv, io, sys, datetime, calendar
+import csv, sys, datetime, calendar
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
@@ -11,14 +11,12 @@ from .choices import *
 from .logic import *
 
 #this handles uploading of raw data
-def upload(request, check="foo"):
-
+def upload(request, check="default"):
     #templates
     template_upload = 'ULM/upload.html'
 
     #list of file types
     file_types = FILE_TYPE_CHOICES
-    print(file_types)
     #list of existing files
     files = File.objects.all()
 
@@ -84,6 +82,7 @@ def upload(request, check="foo"):
         irms_file_exist = False
         postal_code_file_exist = False
         rental_block_file_exist = False
+        all_file_type_exist = False
         for dict in files_dict:
             if dict['file_type'] == FA_RISK:
                 fa_risk_file_exist = True
@@ -103,10 +102,15 @@ def upload(request, check="foo"):
             patient_info = get_patient_info()
             store_patient_info(patient_info)
 
-        return redirect('upload_success', "bar")
+        return redirect('upload_success', a_file_name)
     
 # show a message that uploading is successful
-
+def upload_success(request, filename):
+    template_upload_success = 'ULM/upload_success.html'
+    context = {
+        'content' : '{} has been successfully uploaded'.format(filename),
+        }
+    return render(request, template_upload_success, context)
 
 #webpage to show download button
 def download_csv_mapping(request):
@@ -130,7 +134,7 @@ def get_csv(request):
 
     #writer = csv.DictWriter(response, fieldnames = dict_data[0].keys())
     writer = csv.writer(response)
-    writer.writerow(['Month', 'Patient Id', 'House Block', 'House Floor', 'House Unit', 'Street', 'Postal Code', 'Region', 'FA Risk', 'FA', 'TCU Defaulter', 'Referral Status', 'Rental Status'])
+    writer.writerow(['Name', 'Month', 'Patient Id', 'NRIC', 'House Block', 'House Floor', 'House Unit', 'Street', 'Postal Code', 'Region', 'FA Risk', 'FA', 'TCU Defaulter', 'Referral Status', 'Rental Status'])
     for row in data:
         writer.writerow(row)
     return response
@@ -206,9 +210,10 @@ def display(request, month, year, region, block_street):
         house_floor_list = get_dummy_landed_house_floor(dict_data)
         house_unit_list = get_dummy_landed_unit(dict_data)
     else:
+        house_floor_list = get_dummy_house_floor(dict_data)
+        house_unit_list = get_dummy_house_unit(dict_data)
         compiled_status = restructure_data(dict_data)
-        house_floor_list = get_unique_house_floor(dict_data)
-        house_unit_list = get_unique_house_unit(dict_data)
+        
 
     
     

@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+from ULM.database import username, password, DATABASE_NAME
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -83,9 +84,9 @@ WSGI_APPLICATION = 'trydjango.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'ttsh',
-        'USER': 'root',
-        'PASSWORD': 'caheo',
+        'NAME': DATABASE_NAME,
+        'USER': username,
+        'PASSWORD': password,
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }

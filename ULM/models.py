@@ -18,6 +18,8 @@ class File(models.Model):
 class Fa_Risk(models.Model):
     date_generated = models.DateField()
     patient_id = models.CharField(max_length = 20)
+    patient_name = models.CharField(max_length = 100, null = True)
+    patient_nric = models.CharField(max_length = 10, null = True)
     house_block = models.CharField(max_length = 10)
     house_floor = models.IntegerField(null = True)
     house_unit = models.CharField(max_length = 100)
@@ -31,6 +33,8 @@ class Tcu_Defaulter(models.Model):
     date_generated = models.DateField()
     #serial_number = models.CharField(max_length = 20)
     patient_id = models.CharField(max_length = 20)
+    patient_name = models.CharField(max_length = 100, null = True)
+    patient_nric = models.CharField(max_length = 10, null = True)
     postal_code =  models.IntegerField(null = True)
     street = models.CharField(max_length = 100)
     #designation = models.CharField(max_length = 100)
@@ -46,6 +50,8 @@ class Tcu_Defaulter(models.Model):
 class Irms(models.Model):
     patient_id = models.CharField(max_length = 20)
     postal_code =  models.IntegerField(null = True)
+    patient_name = models.CharField(max_length = 100, null = True)
+    patient_nric = models.CharField(max_length = 10, null = True)
     house_block = models.CharField(max_length = 10)
     house_floor = models.IntegerField(null = True)
     house_unit = models.CharField(max_length = 100)
@@ -76,6 +82,8 @@ class Rental_Block(models.Model):
 class Patient_Info(models.Model):
     date_generated = models.DateField()
     patient_id = models.CharField(max_length = 20)
+    patient_name = models.CharField(max_length = 100, null = True)
+    patient_nric = models.CharField(max_length = 10, null = True)
     house_block = models.CharField(max_length = 10)
     house_floor = models.IntegerField(null = True)
     house_unit = models.CharField(max_length = 100)
