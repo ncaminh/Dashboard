@@ -1,0 +1,20 @@
+{% extends 'base_BLM.html' %}
+
+{% block content %}
+
+<form method="POST"> {% csrf_token %}
+	{{ form.as_p }}
+	<ul class="ds-cbox"> <p><strong>Selection:</strong></p>  
+      <li><input type="checkbox" name="main-disease" value="Mental Health"><label>Mental Health</label></li>
+      <li><input type="checkbox" name="main-disease" value="Neurology"><label>Neurology</label></li>
+      <li><input type="checkbox" name="main-disease" value="Urology"><label>Urology</label></li>
+      <li><input type="checkbox" name="main-disease" value="Cardiovascular Disease"><label>Cardiovascular Disease</label></li>
+      <li><input type="checkbox" name="main-disease" value="Renal"><label>Renal</label></li>
+      <li><input type="checkbox" name="main-disease" value="Respiratory"><label>Respiratory</label></li>
+      <li><input type="checkbox" name="main-disease" value="Orthopaedics"><label>Orthopaedics</label></li>
+      <li><input type="checkbox" name="main-disease" value="Diabetes"><label>Diabetes</label></li>
+    </ul>
+	<input type="submit" name="Upload"/>
+</form>
+
+{% endblock %}

@@ -37,9 +37,9 @@
 
 {% block script %}
 <script>
-	var check = "{{check|escapejs}}"
-	if (check == "bar") {
-		alert("Upload successful");
+	var file_check = "{{check|escapejs}}"
+	if (file_check != "default") {
+		alert("File: " + file_check + " has been uploaded successfully");
 	}
 </script>
 

@@ -1,3 +1,4 @@
+
 const openModalButtons = document.querySelectorAll('[data-modal-target]')
 const closeModalButtons = document.querySelectorAll('[data-close-button]')
 const overlay = document.getElementById('overlay')
@@ -18,7 +19,9 @@ closeModalButtons.forEach(button => {
 })
 
 toggler.addEventListener('click', () => {
-	fill_data_sub_diseases()
+	toggled = 1 - toggled
+	if (toggled == 1) fill_data_sub_diseases();
+	else clear_data_sub_diseases();
 })
 
 function openModal(modal) {
@@ -153,44 +156,52 @@ function fill_data_sub_diseases() {
 	// alert(regions)
 	// alert(Object.keys(info_full))
 
-	if (Object.keys(choices).length == 1) {
+	if (Object.keys(choices).length == 1 && Object.keys(choices).toString() != "Special") {
 		let tempo = []
 		for (choice in choices) {
 			tempo = tempo.concat(mapping_dict[choices[choice]]);
 		}
+
+		main_chosen_disease = Object.keys(choices).toString()
+		let main_index = info_full[regions[0]][1].findIndex(element => element == main_chosen_disease)
+
+		choices_indexes.push(main_index);
 
 		if (tempo.length < 4) {
 			for (index = 0; index < tempo.length; index++) {
       			temp = info_full[regions[0]][1].findIndex(element => element == tempo[index]);
       			if (temp > -1) choices_indexes.push(temp);
     		}
-    		
-    		for (region_index = 0; region_index < regions.length; region_index++) {
-    			let total_sub_area = info_full[regions[region_index]][0].length
-    			for (i = 0; i < choices_indexes.length; i++) {
-    				preview_dict[regions[region_index]] = {}
-		    		preview_dict[regions[region_index]][choices_indexes[i]] = 0
+    	}
 
-		    		for (var row = 1; row <= total_sub_area; row ++) {
-						preview_dict[regions[region_index]][choices_indexes[i]] += info_full[regions[region_index]][row+1][choices_indexes[i]]
-					}
+    	
+		for (region_index = 0; region_index < regions.length ; region_index++) {
+			let total_sub_area = info_full[regions[region_index]][0].length
+			for (i = 0; i < choices_indexes.length; i++) {
+				preview_dict[regions[region_index]] = {}
+	    		preview_dict[regions[region_index]][choices_indexes[i]] = 0
 
-					let k = i+1;
-					let txt = info_full[regions[0]][1][choices_indexes[i]];
-					// preview_dict[regions[region_index]][choices_indexes[i]]
+	    		for (var row = 1; row <= total_sub_area; row ++) {
+					preview_dict[regions[region_index]][choices_indexes[i]] += info_full[regions[region_index]][row+1][choices_indexes[i]]
+				}
 
-					txt +=  ": " + preview_dict[regions[region_index]][choices_indexes[i]].toString();
-					$('area[id ="' + regions[region_index] + '"]').data(k.toString(), txt) 
-		    	}
-		    	
-    		}
+
+				if (i > 0) {
+					let txt = info_full[regions[0]][1][choices_indexes[i]] + ": " + preview_dict[regions[region_index]][choices_indexes[i]].toString();
+					$('area[id ="' + regions[region_index] + '"]').data(i.toString(), txt)
+				}
+
+				if (i==0) {
+					let txt = "Total: " + preview_dict[regions[region_index]][choices_indexes[i]].toString();
+					$('area[id ="' + regions[region_index] + '"]').data('0',  txt)
+				}
+	    	}
+	    	
+		}
    
     		// $('area[id ="' + regions[0] + '"]').data('1',2000);
-    		show_data_sub_diseases(tempo.length)
+		show_data_sub_diseases(choices_indexes.length)
 
-		} else {
-			alert("The selected disease has more than 3 secondary diseases")
-		}
 	} else {
 		alert("You have selected more than 1 disease")
 	}
@@ -200,12 +211,15 @@ function fill_data_sub_diseases() {
 function show_data_sub_diseases(diseases_num) {
 	$("p").remove(".preview");	
 	$('area').each(function(){
-		let txt="";
-		for (i = 1; i <= diseases_num; i++) {
-			if (i > 1) {
+		let txt="<strong><u>";
+		for (i = 0; i < diseases_num; i++) {
+			if (i > 0) {
 				txt += "<br>";
 			}
 			txt += $(this).data(i.toString());
+			if (i == 0) {
+				txt += "</u></strong>"
+			}
 		}
 		
 		// alert(txt)
@@ -218,6 +232,10 @@ function show_data_sub_diseases(diseases_num) {
         $span.css({top: top+'px', left: left+'px', position:'absolute'});
         $span.appendTo('#my_map');
     })
+}
+
+function clear_data_sub_diseases() {
+	$("p").remove(".preview");	
 }
 /*_________________________________________________________*/
 /*

@@ -53,6 +53,8 @@
 }
 
 #btn_expand {
+	margin-left: 5vw;
+	margin-bottom: 2vh;
 	border-radius: 4px;
 	background: linear-gradient(120deg, #f093fb 0%, #f5576c 100%);;
 	border: none;
@@ -62,7 +64,6 @@
 	cursor: pointer;
 	padding: 1vw;
 	font-size: 1vw;
-	margin-left: 1vw; 
 }
 
 #btn_expand span {
@@ -214,6 +215,25 @@ td {
 	text-align: center;
 	padding-left:1vw;
 	padding-right:1vw; 
+}
+
+.cell_to_hover .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 10;
+}
+
+
+.cell_to_hover:hover .tooltiptext{
+	visibility: visible;
 }
 
 .green_cell {
@@ -404,7 +424,7 @@ input[type="checkbox"]:not(:checked) + label {
 }
 
 .preview {
-	font-size: 0.5vw;
+	font-size: 12px;
 }
 
 

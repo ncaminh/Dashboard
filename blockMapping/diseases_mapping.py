@@ -11,5 +11,5 @@ Map_list = {
 	"Urology": ['Benign Prostatic Hyperplasia', 'Nephritis/Nephrosis'],
 }
 
-with open('JSON/diseases_mapping.json', 'w') as f:
+with open('blockMapping/JSON/diseases_mapping.json', 'w') as f:
 	json.dump(Map_list, f, ensure_ascii=False, indent=4)
