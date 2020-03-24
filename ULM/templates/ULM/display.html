@@ -1,6 +1,11 @@
 {% extends 'base_ULM.html' %}
 {% load static %}
 
+{% block title %}
+<title>Unit Level Mapping: Display</title>
+{% endblock %}
+
+
 {% block content %}
 
 <!-- <h1> This is the display page where visualization table will be displayed</h1>
@@ -25,10 +30,12 @@ data: {{data}}
 	<table border=0>
 		<tr class="table_title"><td>Legend</td></tr>
 		<tr class="table_header_row"><td>Label</td><td>Program</td></tr>
-		<tr><td class='red_cell'>FA</td><td>Frequent Admitter</td></tr>
-		<tr><td class='green_cell'>FR</td><td>Frequent Admitter Risk</td></tr>
-		<tr><td class='yellow_cell'>TD</td><td>TCU Defaulter</td></tr>
-		<tr><td class='blue_cell'>AD</td><td>Referral</td></tr>
+		<tr><td class='cell_FA'>FA</td><td>Frequent Admitter</td></tr>
+		<tr><td class='cell_FR'>FR</td><td>Frequent Admitter Risk</td></tr>
+		<tr><td class='cell_TCU'>TD</td><td>TCU Defaulter</td></tr>
+		<tr><td class='cell_Referral'>AD</td><td>Referral: Admitted</td></tr>
+		<tr><td class='cell_Withdrawn'>WD</td><td>Referral: Withdrawn</td></tr>
+		<tr><td class='cell_Others'></td><td>More than 1 profile</td></tr>
 		
 	</table>
 </div>
@@ -86,49 +93,60 @@ data: {{data}}
 						let cell_content = "";
 						let status_tracker = 0;
 						let cell_color;
-						
+						let txt ="";
+
 						// alert(typeof(data[curr_floor][curr_unit]['fa_risk_status']));
 						if (data[curr_floor][curr_unit]['fa_risk_status'] == "FR") {
 							cell_content += "FR ";
-							status_tracker 	+= 1000;
+							status_tracker 	+= 10000;
 						}
 
 						if (data[curr_floor][curr_unit]['fa_status'] == "FA") {
 							cell_content += "FA ";	
-							status_tracker 	+= 100;
+							status_tracker 	+= 1000;
 						}
 
 						if (data[curr_floor][curr_unit]['tcu_status'] == "TD") {
 							cell_content += "TD ";	
-							status_tracker 	+= 10;
+							status_tracker 	+= 100;
 						}
 
 						if (data[curr_floor][curr_unit]['irms_status'] == "AD") {
 							cell_content += "AD ";	
-							status_tracker 	+= 1;
+							status_tracker 	+= 10;
 						}
 
+						if (data[curr_floor][curr_unit]['irms_status_2'] == "WD") {
+							cell_content += "WD ";	
+							status_tracker 	+= 1;
+						}
 						switch (status_tracker) {
+							case 10000:
+								cell_color = "cell_FR";
+								break;
 							case 1000:
-								cell_color = "green_cell";
+								cell_color = "cell_FA";
 								break;
 							case 100:
-								cell_color = "red_cell";
+								cell_color = "cell_TCU";
 								break;
 							case 10:
-								cell_color = "yellow_cell";
+								cell_color = "cell_Referral";
 								break;
 							case 1:
-								cell_color = "blue_cell";
-								break;
-							case 0:
-								cell_color ="blank_cell";
+								cell_color ="cell_Withdrawn";
 								break;
 							default:
-								cell_color = "purple_cell";
+								cell_color = "cell_Others";
 						}
- 
-						mytable += '<td class= "cell_to_hover ' + cell_color + '">' + cell_content + ' <span class="tooltiptext">Tooltip text</span></td>';
+ 						
+						for (i in data[curr_floor][curr_unit]['patient_id']) {
+							if (i > 0) txt += "<br>"
+							txt += data[curr_floor][curr_unit]['patient_id'][i]
+						}
+							 
+
+						mytable += '<td class= "cell_to_hover ' + cell_color + '">' + cell_content + ' <span class="patient_ID"> Patient ID(s): ' + txt +'</span></td>';
 					}
 					else {
 						mytable += '<td></td>';

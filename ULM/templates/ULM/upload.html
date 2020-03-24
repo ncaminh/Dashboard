@@ -1,11 +1,17 @@
 {% extends 'base_ULM.html' %}
 {% load static %}
 
+{% block title %}
+<title>Unit Level Mapping: Upload</title>
+{% endblock %}
+
+
 {% block content %}
 
-<p> Uploaded filed </p>
+<!-- <p class="intro"> Uploaded file(s) </p> -->
 
-<table id="uploaded_table">
+<table class="uploaded_table">
+	<tr><td><span style="font-weight: bold; font-size: 20px">Uploaded file(s)</span></td></tr>
 	<tr class="table_title"><td>File</td><td>Uploaded time</td></tr>
 	{% for file in files %}
 		<tr>
@@ -17,15 +23,9 @@
 
 
 
-<form method="POST" enctype="multipart/form-data">
+<form method="POST" enctype="multipart/form-data" class="ULM_form">
 	{% csrf_token %}
-<!-- >
-    <label for="test"> Test file:</label>
-    <input type="file" name="test" id="test">
-    <label for="fa_risk"> FA risk file:</label>
-    <input type="file" name="fa_risk" id="fa_risk">
--->
-	<table id="upload_table">
+	<table>
     	{{form.as_table}}
 	</table>
     <button type="submit"> Upload </button>
