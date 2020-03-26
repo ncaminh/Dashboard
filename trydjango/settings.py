@@ -10,8 +10,18 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
+import json
 import os
 from ULM.database import username, password, DATABASE_NAME
+
+# import username, password, DATABASE_NAME
+log_in_file = open('blockMapping/JSON/log_in.json', 'r', encoding='utf-8');
+database = json.load(log_in_file);
+log_in_file.close();
+
+username = database["username"]
+DATABASE_NAME = database["database"]
+password = database["password"]
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
