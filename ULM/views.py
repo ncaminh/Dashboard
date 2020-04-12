@@ -134,7 +134,11 @@ def get_csv(request):
 
     #writer = csv.DictWriter(response, fieldnames = dict_data[0].keys())
     writer = csv.writer(response)
-    writer.writerow(['Name', 'Month', 'Patient Id', 'NRIC', 'House Block', 'House Floor', 'House Unit', 'Street', 'Postal Code', 'Region', 'FA Risk', 'FA', 'TCU Defaulter', 'Referral Status', 'Rental Status'])
+    writer.writerow(['Name', 'Month', 'Patient Id', 'NRIC', 'House Block', 'House Floor', 'House Unit', 'Street', 'Region', 'Postal Code', 'FA Risk', 'FA', 'TCU Defaulter', 'Referral Status', 'Rental Status'])
+    for row in data:
+        writer.writerow(row)
+    return response
+
     for row in data:
         writer.writerow(row)
     return response

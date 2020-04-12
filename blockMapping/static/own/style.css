@@ -167,7 +167,13 @@ table {
 
 
 #table_display_place {
-	transform: translate(20%, 50%);
+	/*transform: translate(10%, 50%);*/
+}
+
+#table_display {
+	margin-left:auto; 
+    margin-right:auto;
+
 }
 
 .table_header_row {
@@ -186,8 +192,9 @@ table {
   cursor: auto;
 }
 
-#Legend {
-	transform: translate(20%, 50%);
+#table_legend{
+	margin-left:auto; 
+    margin-right:auto;
 }
 
 tr:not(.table_header_row):hover {

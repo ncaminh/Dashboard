@@ -26,8 +26,8 @@ data: {{data}}
 <div id="table_display_place">
 </div>
 
-<div id="Legend">
-	<table border=0>
+<div id="table_legend_place">
+	<table id="table_legend" border=0>
 		<tr class="table_title"><td>Legend</td></tr>
 		<tr class="table_header_row"><td>Label</td><td>Program</td></tr>
 		<tr><td class='cell_FA'>FA</td><td>Frequent Admitter</td></tr>
@@ -62,7 +62,7 @@ data: {{data}}
 	}
 
 	function create_table_display() {
-		var mytable = '<table border=0><tr><td class=' + rental_stat + '>' + response['Region'] + ': ' + response['Block'] + ' ' + response['Street'];
+		var mytable = '<table id="table_display" border=0><tr><td class=' + rental_stat + '>' + response['Region'] + ': ' + response['Block'] + ' ' + response['Street'];
 
 		if (rental == "True") {
 			mytable += ' (Rental Unit)';
