@@ -1,6 +1,10 @@
-from . import database as database_file
+import json
 
-DATABASE_NAME = database_file.DATABASE_NAME
+log_in_file = open('blockMapping/JSON/log_in.json', 'r', encoding='utf-8');
+database = json.load(log_in_file);
+log_in_file.close();
+
+DATABASE_NAME = database["database"]
 
 PATIENT_INFO_INITIALIZATION = """
 SELECT 
